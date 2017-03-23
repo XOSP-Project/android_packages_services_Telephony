@@ -13,7 +13,6 @@ LOCAL_JAVA_LIBRARIES := telephony-common voip-common ims-common telephony-ext
 LOCAL_STATIC_JAVA_LIBRARIES := \
         ims-ext-common \
         org.apache.http.legacy \
-        org.cyanogenmod.platform.internal \
         guava \
         volley
 
