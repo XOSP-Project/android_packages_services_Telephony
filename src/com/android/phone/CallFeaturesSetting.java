@@ -147,8 +147,13 @@ public class CallFeaturesSetting extends PreferenceActivity
                         new Dialog.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                startActivity(new Intent(mPhone.getContext(),
-                                        com.android.phone.MobileNetworkSettings.class));
+                                if (PhoneUtils.isNetworkSettingsApkAvailable(mPhone.getContext())) {
+                                    startActivity(new Intent(
+                                            "codeaurora.intent.action.MOBILE_NETWORK_SETTINGS"));
+                                } else {
+                                    startActivity(new Intent(mPhone.getContext(),
+                                            com.android.phone.MobileNetworkSettings.class));
+                                }
                             }
                         };
                 builder.setMessage(getResources().getString(
@@ -335,7 +340,8 @@ public class CallFeaturesSetting extends PreferenceActivity
 
         if (ImsManager.isVtEnabledByPlatform(mPhone.getContext()) &&
                 ImsManager.isVtProvisionedOnDevice(mPhone.getContext()) &&
-                mPhone.mDcTracker.isDataEnabled(true)) {
+                mPhone.mDcTracker.isDataEnabled(true) &&
+                (mPhone.getImsPhone() != null)) {
             boolean currentValue =
                     ImsManager.isEnhanced4gLteModeSettingEnabledByUser(mPhone.getContext())
                     ? PhoneGlobals.getInstance().phoneMgr.isVideoCallingEnabled(
