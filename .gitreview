@@ -1,0 +1,5 @@
+[gerrit]
+host=review.xosp.org
+port=29418
+project=android_packages_services_Telephony.git
+defaultbranch=xosp-n-rebase
